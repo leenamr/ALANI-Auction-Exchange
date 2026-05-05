@@ -141,12 +141,11 @@ If you redeploy contracts, update `config.js` with the new addresses **and** red
 
 ## Team
 
-| Name | Role |
-|---|---|
-| Ismael Alhindi | Developer |
-| Leen Amro | Developer |
-| Saleh Alsaheb | Developer |
-| Dr. Haitham Alani | Supervisor |
+| Name | Email |
+| Ismael Alhindi | ism20220379@std.psut.edu.jo |
+| Leen Amro | lee20210258@std.psut.edu.jo |
+| Saleh Alsaheb | sal20220045@std.psut.edu.jo |
+| Dr. Haitham Alani | h.ani@psut.edu.jo |
 
 Princess Sumaya University for Technology (PSUT) — Computer Engineering Department — Blockchain and Decentralized Applications Project.
 
