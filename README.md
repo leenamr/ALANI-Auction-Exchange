@@ -142,6 +142,7 @@ If you redeploy contracts, update `config.js` with the new addresses **and** red
 ## Team
 
 | Name | Email |
+|---|---|
 | Ismael Alhindi | ism20220379@std.psut.edu.jo |
 | Leen Amro | lee20210258@std.psut.edu.jo |
 | Saleh Alsaheb | sal20220045@std.psut.edu.jo |
