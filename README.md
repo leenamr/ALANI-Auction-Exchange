@@ -1,6 +1,6 @@
 # Alani Auction Exchange
 
-A decentralized auction platform built on the Ethereum **Sepolia** testnet. Sellers list items, bidders compete in English-style auctions, and all bids are paid in **ALANI**, a custom ERC-20 token created specifically for the system. There is no central operator — auction rules are enforced by smart contracts that anyone can audit on-chain.
+A decentralized auction platform built on the Ethereum **Sepolia** testnet. Sellers list items, bidders compete in English-style auctions, and all bids are paid in **ALANI**, a custom ERC-20 token created specifically for the system. There is no central operator, auction rules are enforced by smart contracts that anyone can audit on-chain.
 
 **Live front end:** https://alani-auction-exchange.vercel.app
 
@@ -12,13 +12,13 @@ Most online auction sites ask you to trust the operator. The operator stores the
 
 Alani Auction Exchange replaces that trusted operator with a smart contract. Once the contract is deployed, the rules can't change. Anyone can inspect the bids, the highest bidder, the deadline, and the final settlement. The system is built on three pieces:
 
-1. **A custom ERC-20 token (ALANI)** — the bidding currency.
-2. **An auction-house contract** — runs the auctions, holds bids in escrow, and pays out winners.
-3. **A web front end** — a browser dashboard that talks to the contracts via MetaMask.
+1. **A custom ERC-20 token (ALANI)**: the bidding currency.
+2. **An auction-house contract**: runs the auctions, holds bids in escrow, and pays out winners.
+3. **A web front end**: a browser dashboard that talks to the contracts via MetaMask.
 
 ---
 
-## Architecture at a glance
+## Architecture
 
 ```
 +----------------+        +-------------------+        +----------------------+
@@ -39,7 +39,7 @@ The browser never holds private keys. It builds transactions and asks MetaMask t
 
 ---
 
-## The two smart contracts
+## The Two Smart Contracts
 
 ### `AuctionToken` — the ALANI ERC-20 token
 
@@ -63,7 +63,7 @@ Events emitted for every state change: `AuctionCreated`, `BidPlaced`, `PreviousB
 
 ---
 
-## Deployed contract addresses (Sepolia)
+## Deployed Contract Addresses (Sepolia)
 
 | Contract | Address | Etherscan |
 |---|---|---|
@@ -108,24 +108,6 @@ Known limitations (called out honestly in the paper):
 
 ---
 
-## Repository layout
-
-```
-.
-├── contracts/             Solidity source for AuctionToken and TokenAuctionHouse
-├── test/                  Hardhat unit tests (7 tests, all passing)
-├── frontend/              Static site (HTML, CSS, JS, Ethers.js)
-│   ├── index.html
-│   ├── app.js
-│   └── config.js          contract addresses and ABIs
-├── README.md              this file
-└── paper/                 IEEE LaTeX writeup (main.tex, references.bib, figures/)
-```
-
-(Adjust the paths above to match your actual repo structure if it differs.)
-
----
-
 ## Running locally
 
 ### Prerequisites
@@ -157,21 +139,6 @@ If you redeploy contracts, update `config.js` with the new addresses **and** red
 
 ---
 
-## Demo flow (what to show in the video)
-
-1. **Open the live site**, connect MetaMask on Sepolia, show the ALANI balance.
-2. **Claim from the faucet** — first transaction, easy way to introduce gas and signing.
-3. **Switch accounts in MetaMask** to a "seller" wallet, **create an auction**.
-4. **Switch back** to the bidder wallet, **load the auction by ID**.
-5. **Approve** the auction house for the bid amount (transaction 1).
-6. **Place the bid** (transaction 2). Show the UI update.
-7. **Open Etherscan** on the auction house contract and point out the new transactions appearing in real time.
-8. **Try to bid as the seller** to demonstrate the `SellerCannotBid` rule firing.
-
-Have screenshots from the paper ready as a backup if Sepolia is slow.
-
----
-
 ## Team
 
 | Name | Role |
@@ -185,6 +152,3 @@ Princess Sumaya University for Technology (PSUT) — Computer Engineering Depart
 
 ---
 
-## License
-
-Add a license file (MIT is a common choice for student projects) before publishing the repo publicly.
