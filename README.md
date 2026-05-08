@@ -144,45 +144,6 @@ This project is a classroom DApp prototype. The main limitations are:
 
 ---
 
-## Developer Notes
-
-The repository includes Hardhat tests for the smart contracts.
-
-```bash
-npm install
-npx hardhat test
-```
-
-To deploy a new version:
-
-1. Deploy `AuctionToken`.
-2. Copy the deployed token address.
-3. Deploy `TokenAuctionHouse` using the token address as constructor input.
-4. Update `frontend/config.js` with the new contract addresses.
-5. Redeploy the front end.
-
----
-
-## Repository Structure
-
-```text
-ALANI-Auction-Exchange/
-├── contracts/              # Solidity smart contracts
-├── frontend/               # Browser front end
-├── scripts/                # Deployment scripts
-├── test/                   # Hardhat unit tests
-├── docs/                   # Documentation files
-├── remix/                  # Remix-related deployment files
-├── Photos/                 # Project screenshots
-├── README.md
-├── hardhat.config.js
-├── remix.hardhat.config.js
-├── package.json
-└── package-lock.json
-```
-
----
-
 
 ## Team
 
