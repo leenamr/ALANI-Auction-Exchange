@@ -98,7 +98,7 @@ Token decimals: **18**
 
 ## User Workflow
 
-```text
+
 1. Open the live front end.
 2. Connect MetaMask.
 3. Switch MetaMask to Sepolia.
@@ -108,7 +108,7 @@ Token decimals: **18**
 7. Place a bid.
 8. Confirm the transaction in MetaMask.
 9. View the updated auction state.
-```
+
 
 Bidding requires two blockchain transactions:
 
