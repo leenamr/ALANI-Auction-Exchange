@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Alani Auction Exchange</title>
+    <link rel="icon" type="image/svg+xml" href="assets/alani-logo.svg" />
+    <link rel="apple-touch-icon" href="assets/alani-logo.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.5/dist/ethers.umd.min.js"></script>
+    <script src="config.js"></script>
+  </head>
+  <body data-theme="dark">
+    <div class="cyber-grid" aria-hidden="true"></div>
+    <main class="app-shell">
+      <section class="topbar">
+        <div class="brand-lockup">
+          <div class="logo-orbit" aria-label="PSUT logo">
+            <img src="assets/psut-logo.png" alt="PSUT logo" />
+          </div>
+          <div>
+            <p class="eyebrow">PSUT Sepolia Auction Platform</p>
+            <h1>Alani Auction Exchange</h1>
+            <p class="hero-copy">A token-powered bidding console for verified on-chain auctions.</p>
+          </div>
+        </div>
+        <div class="wallet-panel">
+          <button id="themeToggle" class="icon-btn" type="button" aria-label="Switch to light mode">
+            <i id="themeIcon" data-lucide="sun"></i>
+          </button>
+          <button id="connectWallet" class="primary-btn">
+            <i data-lucide="wallet"></i>
+            Connect
+          </button>
+          <div class="account-box">
+            <span id="networkName">No network</span>
+            <strong id="accountAddress">Wallet not connected</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="status-grid">
+        <div class="metric">
+          <i data-lucide="badge-dollar-sign"></i>
+          <span>Token</span>
+          <strong id="tokenAddress">Not configured</strong>
+        </div>
+        <div class="metric">
+          <i data-lucide="scan-line"></i>
+          <span>Auction Contract</span>
+          <strong id="auctionAddress">Not configured</strong>
+        </div>
+        <div class="metric">
+          <i data-lucide="activity"></i>
+          <span>Your ALANI Balance</span>
+          <strong id="tokenBalance">0 ALANI</strong>
+        </div>
+        <button id="claimTokens" class="secondary-btn">
+          <i data-lucide="coins"></i>
+          Claim test tokens
+        </button>
+      </section>
+
+      <section class="workspace">
+        <form id="createAuctionForm" class="panel">
+          <div class="panel-heading">
+            <i data-lucide="gavel"></i>
+            <h2>Create Auction</h2>
+          </div>
+          <label>
+            Item title
+            <input id="auctionTitle" required maxlength="80" placeholder="Gaming laptop" />
+          </label>
+          <label>
+            Description
+            <textarea id="auctionDescription" required rows="4" placeholder="Condition, delivery plan, and item details"></textarea>
+          </label>
+          <div class="field-row">
+            <label>
+              Starting bid (ALANI)
+              <input id="startingBid" required type="number" min="0" step="0.01" value="100" />
+            </label>
+            <label>
+              Min increment (ALANI)
+              <input id="minIncrement" required type="number" min="0.01" step="0.01" value="10" />
+            </label>
+          </div>
+          <label>
+            Duration
+            <select id="durationSeconds">
+              <option value="600">10 minutes</option>
+              <option value="3600" selected>1 hour</option>
+              <option value="86400">1 day</option>
+              <option value="604800">1 week</option>
+            </select>
+          </label>
+          <button class="primary-btn" type="submit">
+            <i data-lucide="plus"></i>
+            Create auction
+          </button>
+        </form>
+
+        <section class="panel">
+          <div class="panel-heading">
+            <i data-lucide="list-filter"></i>
+            <h2>Auction Browser</h2>
+          </div>
+          <div class="field-row compact">
+            <label>
+              Auction ID
+              <input id="auctionIdInput" type="number" min="1" step="1" value="1" />
+            </label>
+            <button id="loadAuction" class="secondary-btn" type="button">
+              <i data-lucide="refresh-cw"></i>
+              Load
+            </button>
+          </div>
+
+          <article class="auction-view">
+            <div class="auction-head">
+              <div>
+                <span id="auctionStatus" class="status-pill">Not loaded</span>
+                <h3 id="loadedTitle">Auction details</h3>
+              </div>
+              <strong id="loadedHighestBid">0 ALANI</strong>
+            </div>
+            <p id="loadedDescription">Load an auction to inspect its current state.</p>
+            <dl class="details-list">
+              <div><dt>Seller</dt><dd id="loadedSeller">-</dd></div>
+              <div><dt>Highest bidder</dt><dd id="loadedBidder">-</dd></div>
+              <div><dt>Required bid</dt><dd id="loadedRequiredBid">-</dd></div>
+              <div><dt>Ends</dt><dd id="loadedEndTime">-</dd></div>
+            </dl>
+          </article>
+
+          <div class="bid-row">
+            <label>
+              Bid amount (ALANI)
+              <input id="bidAmount" type="number" min="0" step="0.01" value="110" />
+            </label>
+            <button id="approveBid" class="secondary-btn" type="button">
+              <i data-lucide="badge-check"></i>
+              Approve
+            </button>
+            <button id="placeBid" class="primary-btn" type="button">
+              <i data-lucide="send"></i>
+              Bid
+            </button>
+          </div>
+
+          <div class="action-row">
+            <button id="cancelAuction" class="ghost-btn" type="button">
+              <i data-lucide="ban"></i>
+              Cancel
+            </button>
+            <button id="finalizeAuction" class="ghost-btn" type="button">
+              <i data-lucide="flag"></i>
+              Finalize
+            </button>
+          </div>
+        </section>
+      </section>
+
+      <section class="event-log">
+        <div class="panel-heading">
+          <i data-lucide="terminal"></i>
+          <h2>Transaction Log</h2>
+        </div>
+        <ol id="logList"></ol>
+      </section>
+    </main>
+
+    <div id="toastStack" class="toast-stack" aria-live="polite" aria-atomic="false"></div>
+    <div id="actionModal" class="modal-shell" aria-hidden="true">
+      <div class="modal-backdrop"></div>
+      <section class="modal-card scale-in" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <span class="badge badge-primary">On-chain action</span>
+        <h2 id="modalTitle">Confirm transaction</h2>
+        <p id="modalMessage">Review this action before opening your wallet.</p>
+        <dl id="modalDetails" class="modal-details"></dl>
+        <div class="modal-actions">
+          <button id="modalCancel" class="ghost-btn" type="button">Cancel</button>
+          <button id="modalConfirm" class="primary-btn" type="button">
+            <i data-lucide="shield-check"></i>
+            Continue
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
