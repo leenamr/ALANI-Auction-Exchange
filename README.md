@@ -183,17 +183,6 @@ ALANI-Auction-Exchange/
 
 ---
 
-## References
-
-- ERC-20 Token Standard: https://eips.ethereum.org/EIPS/eip-20
-- Ethereum Smart Contracts: https://ethereum.org/en/developers/docs/smart-contracts/
-- Solidity Documentation: https://docs.soliditylang.org/
-- Ethers.js Documentation: https://docs.ethers.org/v6/
-- Remix IDE Documentation: https://remix-ide.readthedocs.io/
-- MetaMask Support: https://support.metamask.io/
-- Vercel Documentation: https://vercel.com/docs
-
----
 
 ## Team
 
